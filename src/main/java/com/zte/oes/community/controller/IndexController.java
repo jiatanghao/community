@@ -19,6 +19,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
+        request.getSession().setMaxInactiveInterval(60);
         Cookie[] cookies = request.getCookies();
         if (cookies == null || cookies.length == 0) {
             return "index";
@@ -32,6 +33,6 @@ public class IndexController {
                 break;
             }
         }
-        return "index";
+        return "redirect:http://localhost:4200";
     }
 }

@@ -53,8 +53,10 @@ public class AuthorizeController {
             user.setGmtModify(user.getGmtCreate());
             user.setAccountId(String.valueOf(githubUser.getId()));
             userMapper.insertUser(user);
-            response.addCookie(new Cookie("token", user.getToken()));
+            Cookie cookie = new Cookie("token", user.getToken());
+            cookie.setMaxAge(60);
+            response.addCookie(cookie);
         }
-        return "redirect:/";
+        return "redirect:http://localhost:4200";
     }
 }
